@@ -16,7 +16,7 @@ app.use(session({
 passport.use(new GoogleStrategy({	
     clientID: '218110402944-5vn5r7e4nlcko1j39u6ncjb8s55mbojq.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: 'http://localhost:3000/auth/google/callback'
+    callbackURL: 'https://authgoogleapi.dev.404.codes/auth/google/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     // Puedes realizar acciones adicionales aquí, como guardar el perfil en la base de datos
