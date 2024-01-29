@@ -4,9 +4,8 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 
-
-
 const app = express();
+const ROOT_URL = 'https://authgoogle.dev.404.codes'; // Cambia la URL según tus necesidades
 
 app.use(cors());
 
@@ -18,10 +17,10 @@ app.use(session({
 }));
 
 // Configuración de passport
-passport.use(new GoogleStrategy({	
+passport.use(new GoogleStrategy({
     clientID: '218110402944-5vn5r7e4nlcko1j39u6ncjb8s55mbojq.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: 'https://authgoogle.dev.404.codes/main'
+    callbackURL: `${ROOT_URL}/main`
   },
   function(accessToken, refreshToken, profile, done) {
     // Puedes realizar acciones adicionales aquí, como guardar el perfil en la base de datos
@@ -47,8 +46,6 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-
-
 // Ruta para cerrar sesión
 app.get('/logout', (req, res) => {
   req.logout(function(err) {
@@ -59,8 +56,8 @@ app.get('/logout', (req, res) => {
         console.log("Sesión cerrada correctamente");
         // Redirecciona a la página de inicio o realiza otras acciones necesarias
     }
-});
-  res.redirect('https://authgoogle.dev.404.codes/login');
+  });
+  res.redirect(`${ROOT_URL}/login`);
 });
 
 // Ruta protegida (ejemplo)
@@ -72,9 +69,8 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  res.redirect(`${ROOT_URL}/login`);
 }
-
 
 // Ruta principal
 app.get('/', (req, res) => {
@@ -84,10 +80,5 @@ app.get('/', (req, res) => {
 // Iniciar el servidor
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en http://localhost:${PORT}`);
+  console.log(`Servidor en ejecución en localhost:${PORT}`);
 });
-
-
-
-
-
