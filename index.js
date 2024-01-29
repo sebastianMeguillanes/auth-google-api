@@ -79,10 +79,7 @@ app.get('/auth/google/callback',
     res.redirect('`${ROOT_URL}/main`');
   }
 );
-// Ruta principal
-app.get('/', (req, res) => {
-  res.send('¡Hola! Esta es la página principal.');
-});
+
 
 // Iniciar el servidor
 const PORT = 3000;
