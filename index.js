@@ -47,13 +47,7 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  function(req, res) {
-    // Redirección exitosa
-    res.redirect('https://authgoogle.dev.404.codes/main');
-  }
-);
+
 
 // Ruta para cerrar sesión
 app.get('/logout', (req, res) => {
@@ -66,7 +60,7 @@ app.get('/logout', (req, res) => {
         // Redirecciona a la página de inicio o realiza otras acciones necesarias
     }
 });
-  res.redirect('/');
+  res.redirect('https://authgoogle.dev.404.codes/login');
 });
 
 // Ruta protegida (ejemplo)
