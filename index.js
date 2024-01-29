@@ -20,7 +20,7 @@ app.use(session({
 passport.use(new GoogleStrategy({
     clientID: '218110402944-5vn5r7e4nlcko1j39u6ncjb8s55mbojq.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: `${ROOT_URL}/main`
+    callbackURL: 'https://authgoogleapi.dev.404.codes/auth/google/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     // Puedes realizar acciones adicionales aquí, como guardar el perfil en la base de datos
@@ -72,6 +72,13 @@ function ensureAuthenticated(req, res, next) {
   res.redirect(`${ROOT_URL}/login`);
 }
 
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: `${ROOT_URL}/login`}),
+  function(req, res) {
+    // Redirección exitosa
+    res.redirect('`${ROOT_URL}/main`');
+  }
+);
 // Ruta principal
 app.get('/', (req, res) => {
   res.send('¡Hola! Esta es la página principal.');
