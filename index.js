@@ -2,8 +2,13 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const cors = require('cors');
+
+
 
 const app = express();
+
+app.use(cors());
 
 // Configuración de express-session
 app.use(session({
