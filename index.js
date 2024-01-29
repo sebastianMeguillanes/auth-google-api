@@ -51,7 +51,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
     // Redirección exitosa
-    res.redirect('/');
+    res.redirect('https://authgoogle.dev.404.codes/main');
   }
 );
 
